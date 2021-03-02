@@ -1,0 +1,21 @@
+[debug] [2021-02-26T22:40:40.845Z] ----------------------------------------------------------------------
+[debug] [2021-02-26T22:40:40.847Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\peach\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-02-26T22:40:40.848Z] CLI Version:   9.5.0
+[debug] [2021-02-26T22:40:40.848Z] Platform:      win32
+[debug] [2021-02-26T22:40:40.848Z] Node Version:  v12.9.0
+[debug] [2021-02-26T22:40:40.849Z] Time:          Fri Feb 26 2021 14:40:40 GMT-0800 (Pacific Standard Time)
+[debug] [2021-02-26T22:40:40.849Z] ----------------------------------------------------------------------
+[debug] [2021-02-26T22:40:40.849Z] 
+[debug] [2021-02-26T22:40:40.858Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-02-26T22:40:40.859Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\peach\Documents\Excercises\Portfolio work\Slackclone\slack_clone\src
+
