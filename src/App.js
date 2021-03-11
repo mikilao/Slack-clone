@@ -12,10 +12,11 @@ import db from './firebase';
 function App() {
 
   const [rooms, setRooms]= useState([])//creates a new database of just rooms using useState
+  
   const getChannels= () =>{
     db.collection('rooms').onSnapshot((snapshot) =>{
       setRooms(snapshot.docs.map((doc) =>{
-         return {id: doc.id, name: doc.data().name };
+          return {id: doc.id, name: doc.data().name };
       }))
     })
 
@@ -32,7 +33,7 @@ function App() {
         <Container>
           <Header />
             <Main >
-              <Sidebar />
+              <Sidebar rooms={rooms} />
         <Switch>
           <Route path="/room">
             <Chat />
