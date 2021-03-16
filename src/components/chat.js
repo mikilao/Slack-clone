@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import InfoIcon from '@material-ui/icons/Info';
 import ChatInput from './chatInput';
+import ChatMessage from './chatMessage';
 
 function Chat() {
   return (
@@ -19,7 +20,9 @@ function Chat() {
           </ChannelDetails>
           
       </Header>
-      <MessageContainer></MessageContainer>
+      <MessageContainer>
+          <ChatMessage />
+      </MessageContainer>
       <ChatInput />
               </Container>
   );
