@@ -36,10 +36,12 @@ function App() {
               <Sidebar rooms={rooms} />
         <Switch>
           <Route path="/room">
-            <Chat />
+             <Login />
           </Route>
           <Route path='/'>
-           <Login />
+            <Chat />
+            
+          
           </Route>
         </Switch>
         </Main>
