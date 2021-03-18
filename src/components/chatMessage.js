@@ -10,7 +10,7 @@ function ChatMessage() {
           <MessageContent>
               <Name>
                 Rachel Stemley
-                <span>Date/time</span>
+                <span> Date/time</span>
               </Name>
               <Text>
                   here's the message

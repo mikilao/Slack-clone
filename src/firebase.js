@@ -11,5 +11,7 @@ const firebaseConfig = {
   };
   const firebaseApp = firebase.initializeApp(firebaseConfig);
   const db = firebaseApp.firestore();
-
-export default db;
+  const auth= firebase.auth(); // enable signin thru google
+  const provider = new firebase.auth.GoogleAuthProvider;  
+  export {auth, provider}; 
+  export default db;

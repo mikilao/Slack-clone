@@ -12,7 +12,7 @@ import db from './firebase';
 function App() {
 
   const [rooms, setRooms]= useState([])//creates a new database of just rooms using useState
-  
+  const [user, setUser]= useState()//store user data
   const getChannels= () =>{
     db.collection('rooms').onSnapshot((snapshot) =>{
       setRooms(snapshot.docs.map((doc) =>{
@@ -29,9 +29,14 @@ function App() {
   console.log(rooms);
   return (
     <div className="App">
-      <Router>
+      <Router >
+        {
+          !user ? //takes you to login if no user is set
+             <Login setUser={setUser}/>
+          :
+        
         <Container>
-          <Header />
+          <Header user={user}/>
             <Main >
               <Sidebar rooms={rooms} />
         <Switch>
@@ -46,6 +51,7 @@ function App() {
         </Switch>
         </Main>
         </Container>
+}
       </Router>
     </div>
   );
