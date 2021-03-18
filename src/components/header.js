@@ -1,10 +1,11 @@
 import React from "react";
+import Login from './login';
 import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
-function Header(props) {
+function Header({user, signOut}) {
   return (
     <Container>
       <Main>
@@ -17,9 +18,9 @@ function Header(props) {
         <HelpOutlineIcon />
       </Main>
       <UserContainer>
-        <Name>{props.user.name }</Name>
-        <UserImage>
-          <img src={props.user.photo ? props.user.photo : "​https://i.imgur.com/6VBx3io.png"} />
+        <Name>{user.name}</Name>
+        <UserImage onClick={signOut}>
+          <img src={user.photo ? user.photo : "​https://i.imgur.com/6VBx3io.png"} />
         </UserImage>
       </UserContainer>
     </Container>
@@ -77,4 +78,5 @@ const UserImage = styled.div`
   img {
     width: 100%;
   }
+  cursor: pointer;
 `;

@@ -11,8 +11,10 @@ function Login(props) {
             const newUser ={
                 name: result.user.displayName,
                 photo: result.user.photoURL
-            }
+            } 
+            localStorage.setItem('user', JSON.stringify(newUser)); //storing user data in browser, needs to use JSON.stringify
             props.setUser(newUser)
+          
         })
         .catch((error) => {
             alert(error.message)}

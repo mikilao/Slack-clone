@@ -8,11 +8,12 @@ import Header from './components/header';
 import Sidebar from './components/sidebar';
 import styled from 'styled-components';
 import db from './firebase';
+import {auth, provider} from './firebase';
 
 function App() {
 
   const [rooms, setRooms]= useState([])//creates a new database of just rooms using useState
-  const [user, setUser]= useState()//store user data
+  const [user, setUser]= useState(JSON.parse(localStorage.getItem('user')))//store user data in tags, local storage keeps user logged in
   const getChannels= () =>{
     db.collection('rooms').onSnapshot((snapshot) =>{
       setRooms(snapshot.docs.map((doc) =>{
@@ -26,6 +27,15 @@ function App() {
     
   }, [])
  
+  const signOut = () => {
+    auth.signOut().then(()=>{
+      localStorage.removeItem('user');
+      setUser(null);
+      alert("Logout?")
+    })
+  }
+
+
   console.log(rooms);
   return (
     <div className="App">
@@ -36,7 +46,7 @@ function App() {
           :
         
         <Container>
-          <Header user={user}/>
+          <Header user={user} signOut={signOut}/>
             <Main >
               <Sidebar rooms={rooms} />
         <Switch>
