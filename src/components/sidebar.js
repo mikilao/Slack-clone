@@ -1,56 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { sidebarItemsData } from "../data/SidebarData";
 import db from "../firebase";
+import { useHistory } from "react-router-dom";
 
 function Sidebar(props) {
+  const history = useHistory();
 
-    const addChannel = ( )=>{
-        const promptName =prompt("Channel name?");
-        if(promptName){
-            db.collection('rooms').add({
-                name: promptName
-            })
-        }
-
+  const goToChannel = (id) => {
+    if (id) {
+      console.log(id);
+      history.push(`/room/${id}`);
     }
-    return (
-        <Container>
-            <WorkspaceContainer>
-                <Name>New User</Name>
-                <NewMessage>
-                    <AddCircleOutlineIcon />
-                </NewMessage>
-            </WorkspaceContainer>
-            <MainChannels>
-                {sidebarItemsData.map(item => (
-                    <MainChannelItem>
-                        {item.icon}
-                        {item.text}
-                    </MainChannelItem>
-                ))}
-            </MainChannels>
-            <ChannelContainers>
-                <NewChannelContainer>
-                    <div>
-                        Channels
-                    </div>
-                    <AddIcon onClick={addChannel}/>
-                </NewChannelContainer>
-                <ChannelsList>
-                    {
-                        props.rooms.map(item => (
-                            <Channel>
-                            # {item.name}
-                             </Channel>
-                            ))
-                    }
-                      </ChannelsList>
-            </ChannelContainers>
-        </Container>
-    );
+  };
+  const addChannel = () => {
+    const promptName = prompt("Channel name?");
+    if (promptName) {
+      db.collection("rooms").add({
+        name: promptName,
+      });
+    }
+  };
+  return (
+    <Container>
+      <WorkspaceContainer>
+        <Name>New User</Name>
+        <NewMessage>
+          <AddCircleOutlineIcon />
+        </NewMessage>
+      </WorkspaceContainer>
+      <MainChannels>
+        {sidebarItemsData.map((item) => (
+          <MainChannelItem>
+            {item.icon}
+            {item.text}
+          </MainChannelItem>
+        ))}
+      </MainChannels>
+      <ChannelContainers>
+        <NewChannelContainer>
+          <div>Channels</div>
+          <AddIcon onClick={addChannel} />
+        </NewChannelContainer>
+        <ChannelsList>
+           { 
+           props.rooms.map(item => (
+            <Channel onClick={() => goToChannel(item.id)}>
+              # {item.name}
+            </Channel>
+          ))}
+        </ChannelsList>
+      </ChannelContainers>
+    </Container>
+  );
 }
 
 export default Sidebar;
@@ -68,8 +72,7 @@ const WorkspaceContainer = styled.div`
     justify-content: space-between;
     bottom-border: 1px solid #532753;
 `;
-const Name = styled.div`
-`;
+const Name = styled.div``;
 const NewMessage = styled.div`
   width: 36px;
   height: 36px;
@@ -96,9 +99,9 @@ color: rgb(188, 171,188);
 cursor: pointer;
 `;
 const ChannelContainers = styled.div`
- color: rgb( 188, 171, 188);
- margin-top: 10px;
-`
+  color: rgb(188, 171, 188);
+  margin-top: 10px;
+`;
 const NewChannelContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -109,17 +112,15 @@ const NewChannelContainer = styled.div`
     :hover{
         background: #350d36;
     }
-`
-const ChannelsList = styled.div `
-
-`
-const Channel = styled.div `
-height: 28px;
-display: flex;
-align-itmes: center;
-padding-left: 19px;
-cursor: pointer;
-:hover{
+`;
+const ChannelsList = styled.div``;
+const Channel = styled.div`
+  height: 28px;
+  display: flex;
+  align-itmes: center;
+  padding-left: 19px;
+  cursor: pointer;
+  :hover {
     background: #350d36;
-}
-`
+  }
+`;
