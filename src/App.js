@@ -37,7 +37,7 @@ function App() {
     });
   };
 
-  console.log(rooms);
+  //console.log(rooms);
   return (
     <div className="App">
       <Router>

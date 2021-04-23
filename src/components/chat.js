@@ -5,23 +5,49 @@ import ChatInput from './chatInput';
 import ChatMessage from './chatMessage';
 import db from "../firebase";
 import {useParams} from 'react-router-dom';
+import firebase from "firebase";
 
-function Chat() {
+function Chat({user}) { // passing in user as a prop now
   let {channelId} = useParams();
   const [channel, setChannel] = useState();
-  
+  const [messages, setMessages] = useState([]);
  
-    const getChannel = () => {
-        db.collection('rooms')
-        .doc(channelId)
-        .onSnapshot((snapshot)=>{
-            setChannel(snapshot.data());
-        })
-    }
+  const getChannel = () => {
+    db.collection('rooms')
+    .doc(channelId)
+    .onSnapshot((snapshot)=>{
+        setChannel(snapshot.data());
+    })
+}
+  const sendMessage = (text) =>{
+    if(channelId){
+      let payload = {
+        text: text,
+        timestamp: firebase.firestore.Timestamp.now(),
+        user: user, 
+        userImage: user.photo
 
+    }
+    db.collection('rooms').doc(channelId).collection('messages').add(payload); 
+    console.log(payload)
+  }
+}
+
+    const getMessages= () => {
+      db.collection('rooms')
+      .doc(channelId) //select individual rooms
+      .collection('messages') // navigates to "messages" on firebase
+      .orderBy('timestamp', 'asc') //display the message in ascending order
+      .onSnapshot((snapshot) =>{
+        let messages = snapshot.docs.map((doc)=> doc.data());
+        console.log(messages);
+        setMessages(messages);
+      }
+      )
+    }
     useEffect(()=>{
         getChannel();
-       // getMessages();
+        getMessages()
     }, [channelId])// listening for channel changes
 
 
@@ -30,7 +56,7 @@ function Chat() {
       <Header>
           <Channel>
                 <ChannelName> # { channel && channel.name}</ChannelName>
-                <ChannelInfo>Channel Info</ChannelInfo>
+                <ChannelInfo>All the info</ChannelInfo>
           </Channel>
           <ChannelDetails>
               <div>
@@ -41,9 +67,19 @@ function Chat() {
           
       </Header>
       <MessageContainer>
-          <ChatMessage />
-      </MessageContainer>
-      <ChatInput />
+                {
+                    messages.length > 0 &&
+                    messages.map((data, index)=>(
+                        <ChatMessage
+                            text={data.text}
+                            name={data.user}
+                            image={data.userImage}
+                            timestamp={data.timestamp}
+                        />
+                    ))
+                }
+            </MessageContainer>
+      <ChatInput sendMessage={sendMessage} />
               </Container>
   );
 }

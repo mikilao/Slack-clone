@@ -1,9 +1,9 @@
 import React from "react";
-import Login from './login';
+//import Login from './login';
 import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+//import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 function Header({user, signOut}) {
   return (
